@@ -1,0 +1,7 @@
+{
+  "orders": [
+    { "id": "1001", "customer": "Empresa A", "status": "Pendiente" },
+    { "id": "1002", "customer": "Empresa B", "status": "Completado" },
+    { "id": "1003", "customer": "Empresa C", "status": "Pendiente" }
+  ]
+}

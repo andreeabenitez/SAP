@@ -1,0 +1,25 @@
+{
+  "sap.app": {
+    "id": "orders",
+    "type": "application",
+    "title": "Orders App",
+    "applicationVersion": {
+      "version": "1.0.0"
+    }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "orders.view.Orders",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    },
+    "dependencies": {
+      "minUI5Version": "1.120.0",
+      "libs": {
+        "sap.m": {}
+      }
+    },
+    "models": {}
+  }
+}

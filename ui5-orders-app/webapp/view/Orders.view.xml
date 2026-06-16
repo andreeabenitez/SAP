@@ -1,11 +1,39 @@
 <mvc:View
+  controllerName="orders.controller.Orders"
   xmlns="sap.m"
   xmlns:mvc="sap.ui.core.mvc">
+
   <App>
-    <Page title="Orders App funcionando 🚀">
+    <Page title="Orders App">
       <content>
-        <Text text="UI5 está vivo"/>
+
+      <List
+  headerText="Lista de Órdenes"
+  items="{
+    path: '/Orders',
+    parameters: { $orderby: 'date asc' }
+  }">
+
+  <ObjectListItem
+    title="{id}"
+    number="{amount}"
+    numberUnit="USD">
+
+    <attributes>
+      <ObjectAttribute text="{customer}" />
+      <ObjectAttribute text="{date}" />
+    </attributes>
+
+    <firstStatus>
+      <ObjectStatus text="{status}" />
+    </firstStatus>
+
+  </ObjectListItem>
+
+</List>
+
       </content>
     </Page>
   </App>
+
 </mvc:View>

@@ -1,0 +1,5 @@
+id;customer;status;amount;date
+ORD-001;Acme Corp;Pending;1500.00;2024-06-01
+ORD-002;TechStart SA;Shipped;3200.50;2024-06-03
+ORD-003;GlobalTrade;Delivered;800.00;2024-06-05
+ORD-004;MegaCorp;Cancelled;4100.75;2024-06-07

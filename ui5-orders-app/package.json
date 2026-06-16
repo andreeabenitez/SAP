@@ -10,9 +10,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@ui5/cli": "^3.0.0"
+    "@ui5/cli": "^3.0.0",
+    "ui5-middleware-simpleproxy": "^3.8.0"
   },
   "dependencies": {
+    "@cap-js/sqlite": "^2.4.0",
     "@sap/cds": "^9.0.0"
   }
 }

@@ -8,10 +8,10 @@ sap.ui.define([
 
         onInit: function () {
             var oModel = new ODataModel({
-                serviceUrl: "http://localhost:4004/odata/v4/orders/",
-                synchronizationMode: "None",
-                operationMode: "Server"
-            });
+    serviceUrl: "/odata/v4/orders/",
+    synchronizationMode: "None",
+    operationMode: "Server"
+});
 
             this.getView().setModel(oModel);
         }

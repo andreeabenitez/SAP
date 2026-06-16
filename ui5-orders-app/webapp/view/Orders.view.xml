@@ -7,30 +7,35 @@
     <Page title="Orders App">
       <content>
 
-      <List
-  headerText="Lista de Órdenes"
-  items="{
-    path: '/Orders',
-    parameters: { $orderby: 'date asc' }
-  }">
+        <List
+          headerText="Lista de Órdenes"
+          items="{
+            path: '/Orders',
+            parameters: { $orderby: 'date asc' }
+          }">
 
-  <ObjectListItem
-    title="{id}"
-    number="{amount}"
-    numberUnit="USD">
+          <ObjectListItem
+            title="{id}"
+            number="{amount}"
+            numberUnit="USD">
 
-    <attributes>
-      <ObjectAttribute text="{customer}" />
-      <ObjectAttribute text="{date}" />
-    </attributes>
+            <attributes>
+              <ObjectAttribute text="{customer}" />
+              <ObjectAttribute text="{date}" />
+            </attributes>
 
-    <firstStatus>
-      <ObjectStatus text="{status}" />
-    </firstStatus>
+            <firstStatus>
+              <ObjectStatus
+                text="{status}"
+                state="{
+                  path: 'status',
+                  formatter: '.formatStatus'
+                }" />
+            </firstStatus>
 
-  </ObjectListItem>
+          </ObjectListItem>
 
-</List>
+        </List>
 
       </content>
     </Page>

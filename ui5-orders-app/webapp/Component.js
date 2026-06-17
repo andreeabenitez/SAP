@@ -6,6 +6,11 @@ sap.ui.define([
   return UIComponent.extend("orders.Component", {
     metadata: {
       manifest: "json"
+    },
+
+    init: function () {
+      UIComponent.prototype.init.apply(this, arguments);
+      this.getRouter().initialize();
     }
   });
 });

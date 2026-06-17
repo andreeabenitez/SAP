@@ -12,8 +12,14 @@ sap.ui.define([
                 synchronizationMode: "None",
                 operationMode: "Server"
             });
-
             this.getView().setModel(oModel);
+        },
+
+        onOrderPress: function (oEvent) {
+            var sId = oEvent.getSource().getBindingContext().getProperty("id");
+            this.getOwnerComponent().getRouter().navTo("detail", {
+                orderId: encodeURIComponent(sId)
+            });
         },
 
         formatStatus: function (sStatus) {

@@ -1,0 +1,27 @@
+<mvc:View
+  controllerName="orders.controller.Detail"
+  xmlns="sap.m"
+  xmlns:mvc="sap.ui.core.mvc">
+
+  <Page
+    title="Detalle de Orden"
+    showNavButton="true"
+    navButtonPress=".onNavBack">
+
+    <content>
+      <ObjectHeader
+        title="{id}"
+        number="{amount}"
+        numberUnit="USD">
+
+        <attributes>
+          <ObjectAttribute title="Cliente" text="{customer}" />
+          <ObjectAttribute title="Fecha"   text="{date}" />
+          <ObjectAttribute title="Estado"  text="{status}" />
+        </attributes>
+
+      </ObjectHeader>
+    </content>
+  </Page>
+
+</mvc:View>

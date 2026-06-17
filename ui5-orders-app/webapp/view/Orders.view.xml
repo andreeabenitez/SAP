@@ -3,7 +3,7 @@
   xmlns="sap.m"
   xmlns:mvc="sap.ui.core.mvc">
 
-  <App>
+  <App id="rootApp">
     <Page title="Orders App">
       <content>
 
@@ -17,7 +17,9 @@
           <ObjectListItem
             title="{id}"
             number="{amount}"
-            numberUnit="USD">
+            numberUnit="USD"
+            type="Navigation"
+            press=".onOrderPress">
 
             <attributes>
               <ObjectAttribute text="{customer}" />

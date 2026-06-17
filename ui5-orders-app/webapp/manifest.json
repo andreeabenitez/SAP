@@ -20,6 +20,36 @@
         "sap.m": {}
       }
     },
-    "models": {}
+    "models": {},
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "orders.view",
+        "controlId": "rootApp",
+        "controlAggregation": "pages",
+        "async": true
+      },
+      "routes": [
+        {
+          "name": "orders",
+          "pattern": "",
+          "target": "orders"
+        },
+        {
+          "name": "detail",
+          "pattern": "orders/{orderId}",
+          "target": "detail"
+        }
+      ],
+      "targets": {
+        "orders": {
+          "viewName": "Orders"
+        },
+        "detail": {
+          "viewName": "Detail"
+        }
+      }
+    }
   }
 }

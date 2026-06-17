@@ -8,11 +8,21 @@
       <content>
 
         <List
-          headerText="Lista de Órdenes"
           items="{
             path: '/Orders',
             parameters: { $orderby: 'date asc' }
           }">
+
+          <headerToolbar>
+            <Toolbar>
+              <Title text="Lista de Órdenes" />
+              <ToolbarSpacer />
+              <Button
+                text="Nueva Orden"
+                icon="sap-icon://add"
+                press=".onCreateOrder" />
+            </Toolbar>
+          </headerToolbar>
 
           <ObjectListItem
             title="{id}"

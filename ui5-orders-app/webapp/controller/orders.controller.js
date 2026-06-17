@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/odata/v4/ODataModel"
-], function (Controller, ODataModel) {
+    "sap/ui/model/odata/v4/ODataModel",
+    "sap/ui/core/Fragment"
+], function (Controller, ODataModel, Fragment) {
     "use strict";
 
     return Controller.extend("orders.controller.Orders", {
@@ -20,6 +21,55 @@ sap.ui.define([
             this.getOwnerComponent().getRouter().navTo("detail", {
                 orderId: encodeURIComponent(sId)
             });
+        },
+
+        onCreateOrder: function () {
+            var oView = this.getView();
+            if (!this._oDialog) {
+                Fragment.load({
+                    id: oView.getId(),
+                    name: "orders.view.CreateOrder",
+                    controller: this
+                }).then(function (oDialog) {
+                    this._oDialog = oDialog;
+                    oView.addDependent(oDialog);
+                    oDialog.open();
+                }.bind(this));
+            } else {
+                this._oDialog.open();
+            }
+        },
+
+        onSaveOrder: function () {
+    var oView = this.getView();
+    var sId       = Fragment.byId(oView.getId(), "inputId").getValue();
+    var sCustomer = Fragment.byId(oView.getId(), "inputCustomer").getValue();
+    var sStatus   = Fragment.byId(oView.getId(), "selectStatus").getSelectedKey();
+    var nAmount   = parseFloat(Fragment.byId(oView.getId(), "inputAmount").getValue());
+    var sDate     = Fragment.byId(oView.getId(), "inputDate").getValue();
+
+    var oModel = this.getView().getModel();
+    var oListBinding = oModel.bindList("/Orders", null, [], [], {
+        $$updateGroupId: "$auto"
+    });
+
+    oListBinding.create({
+        id: sId,
+        customer: sCustomer,
+        status: sStatus,
+        amount: nAmount,
+        date: sDate
+    }, true);
+
+    oModel.submitBatch("$auto").then(function () {
+        oModel.refresh();
+    });
+
+    this._oDialog.close();
+},
+
+        onCancelOrder: function () {
+            this._oDialog.close();
         },
 
         formatStatus: function (sStatus) {

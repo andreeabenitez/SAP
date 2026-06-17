@@ -1,0 +1,31 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:l="sap.ui.layout">
+
+  <Dialog title="Nueva Orden" id="createDialog">
+    <content>
+      <l:VerticalLayout width="100%">
+        <Input id="inputId"       placeholder="ORD-005" />
+        <Input id="inputCustomer" placeholder="Nombre del cliente" />
+        <Select id="selectStatus">
+          <items>
+            <core:Item text="Pending"   key="Pending" />
+            <core:Item text="Shipped"   key="Shipped" />
+            <core:Item text="Delivered" key="Delivered" />
+            <core:Item text="Cancelled" key="Cancelled" />
+          </items>
+        </Select>
+        <Input id="inputAmount" placeholder="0.00" type="Number" />
+        <DatePicker id="inputDate" valueFormat="yyyy-MM-dd" displayFormat="dd/MM/yyyy" />
+      </l:VerticalLayout>
+    </content>
+    <beginButton>
+      <Button text="Crear" type="Emphasized" press=".onSaveOrder" />
+    </beginButton>
+    <endButton>
+      <Button text="Cancelar" press=".onCancelOrder" />
+    </endButton>
+  </Dialog>
+
+</core:FragmentDefinition>

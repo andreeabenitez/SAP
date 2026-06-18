@@ -13,13 +13,23 @@ sap.ui.define([
     return Controller.extend("orders.controller.Orders", {
 
         onInit: function () {
-            var oModel = new ODataModel({
-                serviceUrl: "/odata/v4/orders/",
-                synchronizationMode: "None",
-                operationMode: "Server"
-            });
-            this.getView().setModel(oModel);
-        },
+    var oModel = new ODataModel({
+        serviceUrl: "/odata/v4/orders/",
+        synchronizationMode: "None",
+        operationMode: "Server"
+    });
+    this.getView().setModel(oModel);
+
+    var oRouter = this.getOwnerComponent().getRouter();
+    oRouter.getRoute("orders").attachPatternMatched(this._onRouteMatched, this);
+},
+
+_onRouteMatched: function () {
+    var oBinding = this.byId("ordersList").getBinding("items");
+    if (oBinding) {
+        oBinding.refresh();
+    }
+},
 
         onOrderPress: function (oEvent) {
             var sId = oEvent.getSource().getBindingContext().getProperty("id");

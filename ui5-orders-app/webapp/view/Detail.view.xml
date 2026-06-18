@@ -46,8 +46,17 @@
           </items>
         </Select>
 
-        <Label text="Importe" />
-        <Input value="{amount}" type="Number" editable="{ui>/editMode}" />
+       <Label text="Importe" />
+<Input
+  value="{
+    path: 'amount',
+    type: 'sap.ui.model.type.Float',
+    formatOptions: {
+      decimals: 2,
+      groupingEnabled: false
+    }
+  }"
+  editable="{ui>/editMode}" />
 
         <Label text="Fecha" />
         <DatePicker

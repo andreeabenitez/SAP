@@ -1,8 +1,10 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/odata/v4/ODataModel",
-    "sap/ui/core/Fragment"
-], function (Controller, ODataModel, Fragment) {
+    "sap/ui/core/Fragment",
+     "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
+], function (Controller, ODataModel, Fragment, Filter, FilterOperator) {
     "use strict";
 
     return Controller.extend("orders.controller.Orders", {
@@ -80,7 +82,24 @@ sap.ui.define([
                 case "Cancelled":  return "Error";
                 default:           return "None";
             }
-        }
+        },
+      onSearch: function (oEvent) {
+    var sQuery = oEvent.getParameter("newValue").trim();
+    var oList = this.byId("ordersList");
+    var oBinding = oList.getBinding("items");
+
+    if (sQuery) {
+        var oFilterId = new Filter("id", FilterOperator.Contains, sQuery);
+        var oFilterCustomer = new Filter("customer", FilterOperator.Contains, sQuery);
+        var oCombined = new Filter({
+            filters: [oFilterId, oFilterCustomer],
+            and: false
+        });
+        oBinding.filter(oCombined);
+    } else {
+        oBinding.filter([]);
+    }
+}  
 
     });
 });

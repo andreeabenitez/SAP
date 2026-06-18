@@ -8,21 +8,26 @@
       <content>
 
         <List
+        id="ordersList"
           items="{
             path: '/Orders',
             parameters: { $orderby: 'date asc' }
           }">
 
           <headerToolbar>
-            <Toolbar>
-              <Title text="Lista de Órdenes" />
-              <ToolbarSpacer />
-              <Button
-                text="Nueva Orden"
-                icon="sap-icon://add"
-                press=".onCreateOrder" />
-            </Toolbar>
-          </headerToolbar>
+  <Toolbar>
+    <Title text="Lista de Órdenes" />
+    <ToolbarSpacer />
+    <SearchField
+      width="30%"
+      placeholder="Buscar por cliente o ID..."
+      liveChange=".onSearch" />
+    <Button
+      text="Nueva Orden"
+      icon="sap-icon://add"
+      press=".onCreateOrder" />
+  </Toolbar>
+</headerToolbar>
 
           <ObjectListItem
             title="{id}"

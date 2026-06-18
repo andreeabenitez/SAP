@@ -7,17 +7,19 @@
     <Page title="Orders App">
       <content>
 
-        <List
-        id="ordersList"
-          items="{
-            path: '/Orders',
-            parameters: { $orderby: 'date asc' }
-          }">
+       <List
+  id="ordersList"
+  mode="Delete"
+  delete=".onDeleteOrder"
+  items="{
+    path: '/Orders',
+    parameters: { $orderby: 'date asc' }
+  }">
 
           <headerToolbar>
   <Toolbar>
     <Title text="Lista de Órdenes" />
-    <ToolbarSpacer />
+    <ToolbarSpa cer />
     <SearchField
       width="30%"
       placeholder="Buscar por cliente o ID..."

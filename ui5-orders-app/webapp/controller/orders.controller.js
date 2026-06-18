@@ -3,8 +3,11 @@ sap.ui.define([
     "sap/ui/model/odata/v4/ODataModel",
     "sap/ui/core/Fragment",
      "sap/ui/model/Filter",
-    "sap/ui/model/FilterOperator"
-], function (Controller, ODataModel, Fragment, Filter, FilterOperator) {
+    "sap/ui/model/FilterOperator",
+     "sap/m/MessageBox",
+    "sap/m/MessageToast"
+
+], function (Controller, ODataModel, Fragment, Filter, FilterOperator, MessageBox, MessageToast) {
     "use strict";
 
     return Controller.extend("orders.controller.Orders", {
@@ -44,11 +47,52 @@ sap.ui.define([
 
         onSaveOrder: function () {
     var oView = this.getView();
-    var sId       = Fragment.byId(oView.getId(), "inputId").getValue();
-    var sCustomer = Fragment.byId(oView.getId(), "inputCustomer").getValue();
-    var sStatus   = Fragment.byId(oView.getId(), "selectStatus").getSelectedKey();
-    var nAmount   = parseFloat(Fragment.byId(oView.getId(), "inputAmount").getValue());
-    var sDate     = Fragment.byId(oView.getId(), "inputDate").getValue();
+    var oInputId       = Fragment.byId(oView.getId(), "inputId");
+    var oInputCustomer = Fragment.byId(oView.getId(), "inputCustomer");
+    var oSelectStatus  = Fragment.byId(oView.getId(), "selectStatus");
+    var oInputAmount   = Fragment.byId(oView.getId(), "inputAmount");
+    var oInputDate     = Fragment.byId(oView.getId(), "inputDate");
+
+    var sId       = oInputId.getValue().trim();
+    var sCustomer = oInputCustomer.getValue().trim();
+    var sStatus   = oSelectStatus.getSelectedKey();
+    var nAmount   = parseFloat(oInputAmount.getValue());
+    var sDate     = oInputDate.getValue();
+
+    var bValid = true;
+
+    // Reset de estados previos
+    [oInputId, oInputCustomer, oInputAmount, oInputDate].forEach(function (oInput) {
+        oInput.setValueState("None");
+    });
+
+    if (!sId) {
+        oInputId.setValueState("Error");
+        oInputId.setValueStateText("El ID es obligatorio");
+        bValid = false;
+    }
+
+    if (!sCustomer) {
+        oInputCustomer.setValueState("Error");
+        oInputCustomer.setValueStateText("El cliente es obligatorio");
+        bValid = false;
+    }
+
+    if (isNaN(nAmount) || nAmount <= 0) {
+        oInputAmount.setValueState("Error");
+        oInputAmount.setValueStateText("Introduce un importe válido mayor que 0");
+        bValid = false;
+    }
+
+    if (!sDate) {
+        oInputDate.setValueState("Error");
+        oInputDate.setValueStateText("La fecha es obligatoria");
+        bValid = false;
+    }
+
+    if (!bValid) {
+        return;
+    }
 
     var oModel = this.getView().getModel();
     var oListBinding = oModel.bindList("/Orders", null, [], [], {
@@ -99,7 +143,30 @@ sap.ui.define([
     } else {
         oBinding.filter([]);
     }
-}  
+
+    
+},
+onDeleteOrder: function (oEvent) {
+    var oItem = oEvent.getParameter("listItem");
+    var oContext = oItem.getBindingContext();
+    var sId = oContext.getProperty("id");
+
+    MessageBox.confirm(
+        "¿Seguro que quieres eliminar la orden " + sId + "?",
+        {
+            title: "Confirmar eliminación",
+            onClose: function (sAction) {
+                if (sAction === MessageBox.Action.OK) {
+                    oContext.delete().then(function () {
+                        MessageToast.show("Orden eliminada");
+                    }).catch(function (oError) {
+                        MessageToast.show("Error al eliminar");
+                    });
+                }
+            }
+        }
+    );
+}
 
     });
 });

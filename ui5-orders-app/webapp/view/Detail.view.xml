@@ -1,26 +1,62 @@
 <mvc:View
   controllerName="orders.controller.Detail"
   xmlns="sap.m"
-  xmlns:mvc="sap.ui.core.mvc">
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:l="sap.ui.layout"
+  xmlns:core="sap.ui.core">
 
   <Page
     title="Detalle de Orden"
     showNavButton="true"
     navButtonPress=".onNavBack">
 
+    <headerContent>
+      <Button
+        icon="sap-icon://edit"
+        press=".onEditPress"
+        visible="{= !${ui>/editMode} }" />
+      <Button
+        icon="sap-icon://save"
+        press=".onSavePress"
+        visible="{= ${ui>/editMode} }" />
+      <Button
+        icon="sap-icon://decline"
+        press=".onCancelEdit"
+        visible="{= ${ui>/editMode} }" />
+    </headerContent>
+
     <content>
-      <ObjectHeader
-        title="{id}"
-        number="{amount}"
-        numberUnit="USD">
+      <l:VerticalLayout width="100%" class="sapUiContentPadding">
 
-        <attributes>
-          <ObjectAttribute title="Cliente" text="{customer}" />
-          <ObjectAttribute title="Fecha"   text="{date}" />
-          <ObjectAttribute title="Estado"  text="{status}" />
-        </attributes>
+        <Label text="ID" />
+        <Text text="{id}" />
 
-      </ObjectHeader>
+        <Label text="Cliente" />
+        <Input value="{customer}" editable="{ui>/editMode}" />
+
+        <Label text="Estado" />
+        <Select
+          selectedKey="{status}"
+          enabled="{ui>/editMode}">
+          <items>
+            <core:Item text="Pending"   key="Pending" />
+            <core:Item text="Shipped"   key="Shipped" />
+            <core:Item text="Delivered" key="Delivered" />
+            <core:Item text="Cancelled" key="Cancelled" />
+          </items>
+        </Select>
+
+        <Label text="Importe" />
+        <Input value="{amount}" type="Number" editable="{ui>/editMode}" />
+
+        <Label text="Fecha" />
+        <DatePicker
+          value="{date}"
+          valueFormat="yyyy-MM-dd"
+          displayFormat="dd/MM/yyyy"
+          editable="{ui>/editMode}" />
+
+      </l:VerticalLayout>
     </content>
   </Page>
 

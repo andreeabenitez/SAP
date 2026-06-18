@@ -16,45 +16,45 @@
     parameters: { $orderby: 'date asc' }
   }">
 
-          <headerToolbar>
-  <Toolbar>
-    <Title text="Lista de Órdenes" />
-    <ToolbarSpa cer />
-    <SearchField
-      width="30%"
-      placeholder="Buscar por cliente o ID..."
-      liveChange=".onSearch" />
-    <Button
-      text="Nueva Orden"
-      icon="sap-icon://add"
-      press=".onCreateOrder" />
-  </Toolbar>
-</headerToolbar>
+  <headerToolbar>
+    <Toolbar>
+      <Title text="Lista de Órdenes" />
+      <ToolbarSpacer />
+      <SearchField
+        width="30%"
+        placeholder="Buscar por cliente o ID..."
+        liveChange=".onSearch" />
+      <Button
+        text="Nueva Orden"
+        icon="sap-icon://add"
+        press=".onCreateOrder" />
+    </Toolbar>
+  </headerToolbar>
 
-          <ObjectListItem
-            title="{id}"
-            number="{amount}"
-            numberUnit="USD"
-            type="Navigation"
-            press=".onOrderPress">
+  <ObjectListItem
+  title="{id}"
+  number="{amount}"
+  numberUnit="USD"
+  type="Navigation"
+  press=".onOrderPress">
 
-            <attributes>
-              <ObjectAttribute text="{customer}" />
-              <ObjectAttribute text="{date}" />
-            </attributes>
+    <attributes>
+      <ObjectAttribute text="{customer}" />
+      <ObjectAttribute text="{date}" />
+    </attributes>
 
-            <firstStatus>
-              <ObjectStatus
-                text="{status}"
-                state="{
-                  path: 'status',
-                  formatter: '.formatStatus'
-                }" />
-            </firstStatus>
+    <firstStatus>
+      <ObjectStatus
+        text="{status}"
+        state="{
+          path: 'status',
+          formatter: '.formatStatus'
+        }" />
+    </firstStatus>
 
-          </ObjectListItem>
+  </ObjectListItem>
 
-        </List>
+</List>
 
       </content>
     </Page>

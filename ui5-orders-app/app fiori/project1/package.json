@@ -8,12 +8,14 @@
     "sapui5"
   ],
   "main": "webapp/index.html",
-  "dependencies": {},
   "devDependencies": {
+    "@sap/ux-ui5-tooling": "^1.15.0",
     "@ui5/cli": "^4.0.33",
-    "@sap/ux-ui5-tooling": "1"
+    "cross-env": "^10.1.0"
   },
   "scripts": {
-    "deploy-config": "npx -p @sap/ux-ui5-tooling fiori add deploy-config cf"
+    "start": "fiori run --open \"preview.html#Orders-display\"",
+    "deploy-config": "npx -p @sap/ux-ui5-tooling fiori add deploy-config cf",
+    "start-variants-management": "fiori run --open \"/preview.html#Orders-display\""
   }
 }

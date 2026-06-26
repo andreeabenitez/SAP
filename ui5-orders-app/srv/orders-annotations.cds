@@ -43,3 +43,36 @@ annotate OrdersService.Orders with {
     )
 };
 
+annotate OrdersService.Orders with @(
+    UI.FieldGroup #GeneralInfo: {
+        Label: 'Información General',
+        Data: [
+            { Value: id,     Label: 'ID' },
+            { Value: status, Label: 'Estado', Criticality: statusCriticality },
+            { Value: amount, Label: 'Importe' },
+            { Value: date,   Label: 'Fecha' }
+        ]
+    },
+
+    UI.FieldGroup #CustomerInfo: {
+        Label: 'Cliente',
+        Data: [
+            { Value: customer.name,    Label: 'Nombre' },
+            { Value: customer.email,   Label: 'Email' },
+            { Value: customer.country, Label: 'País' }
+        ]
+    },
+
+    UI.Facets: [
+        {
+            $Type:  'UI.ReferenceFacet',
+            Label:  'Información General',
+            Target: '@UI.FieldGroup#GeneralInfo'
+        },
+        {
+            $Type:  'UI.ReferenceFacet',
+            Label:  'Cliente',
+            Target: '@UI.FieldGroup#CustomerInfo'
+        }
+    ]
+);

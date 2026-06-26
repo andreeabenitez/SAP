@@ -2,15 +2,19 @@ using OrdersService from './orders-service';
 
 annotate OrdersService.Orders with @(
     UI.LineItem: [
-        { Value: id,               Label: 'ID' },
+        { Value: id,           Label: 'ID' },
         { 
-          Value: customer.name,    
-          Label: 'Cliente',
-          ![@UI.Importance]: #High
+            Value: customer.name,
+            Label: 'Cliente',
+            ![@UI.Importance]: #High
         },
-        { Value: status,           Label: 'Estado' },
-        { Value: amount,           Label: 'Importe' },
-        { Value: date,             Label: 'Fecha' }
+        { 
+            Value:       status,
+            Label:       'Estado',
+            Criticality: statusCriticality
+        },
+        { Value: amount, Label: 'Importe' },
+        { Value: date,   Label: 'Fecha' }
     ],
 
     UI.SelectionFields: [ id, status ],
@@ -28,5 +32,14 @@ annotate OrdersService.Orders with {
         Common.Text: customer.name,
         Common.TextArrangement: #TextOnly,
         title: 'Cliente'
+    );
+    status @(
+        Common.ValueList: {
+            CollectionPath: 'Orders',
+            Parameters: [
+                { $Type: 'Common.ValueListParameterOut', LocalDataProperty: status, ValueListProperty: 'status' }
+            ]
+        }
     )
 };
+

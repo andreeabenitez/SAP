@@ -1,9 +1,16 @@
 namespace orders;
 
-entity Orders {
+entity Customers {
   key id       : String(10);
-      customer : String(100);
-      status   : String(20);
-      amount   : Decimal(10,2);
-      date     : Date;
+      name     : String(100);
+      email    : String(100);
+      country  : String(50);
+}
+
+entity Orders {
+  key id         : String(10);
+      customer   : Association to Customers;
+      status     : String(20);
+      amount     : Decimal(10,2);
+      date       : Date;
 }

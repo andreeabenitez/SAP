@@ -1,6 +1,7 @@
 using orders from '../db/schema';
 
 service OrdersService {
+  @odata.draft.enabled: true
   entity Orders as projection on orders.Orders {
     *,
     case status

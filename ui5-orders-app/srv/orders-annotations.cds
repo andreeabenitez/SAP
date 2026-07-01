@@ -75,4 +75,20 @@ annotate OrdersService.Orders with @(
             Target: '@UI.FieldGroup#CustomerInfo'
         }
     ]
-);
+    );
+
+    annotate OrdersService.Orders with {
+    customer @(
+        Common.Text: customer.name,
+        Common.TextArrangement: #TextOnly,
+        title: 'Cliente'
+    );
+    status @(
+        Common.ValueList: {
+            CollectionPath: 'Orders',
+            Parameters: [
+                { $Type: 'Common.ValueListParameterOut', LocalDataProperty: status, ValueListProperty: 'status' }
+            ]
+        }
+    )
+};

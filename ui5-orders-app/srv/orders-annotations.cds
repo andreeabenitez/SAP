@@ -34,15 +34,24 @@ annotate OrdersService.Orders with {
         title: 'Cliente'
     );
     status @(
+        title: 'Estado',
+        Common.ValueListWithFixedValues: true,
         Common.ValueList: {
-            CollectionPath: 'Orders',
+            CollectionPath: 'StatusValues',
             Parameters: [
-                { $Type: 'Common.ValueListParameterOut', LocalDataProperty: status, ValueListProperty: 'status' }
+                {
+                    $Type: 'Common.ValueListParameterOut',
+                    LocalDataProperty: status,
+                    ValueListProperty: 'code'
+                },
+                {
+                    $Type: 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty: 'description'
+                }
             ]
         }
     )
 };
-
 annotate OrdersService.Orders with @(
     UI.FieldGroup #GeneralInfo: {
         Label: 'Información General',

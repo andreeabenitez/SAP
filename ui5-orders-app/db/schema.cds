@@ -14,3 +14,8 @@ entity Orders {
       amount     : Decimal(10,2);
       date       : Date;
 }
+
+entity StatusValues {
+  key code        : String(20);
+      description : String(50);
+}

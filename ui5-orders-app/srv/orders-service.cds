@@ -14,4 +14,5 @@ service OrdersService {
   };
 
   entity Customers as projection on orders.Customers;
+  entity StatusValues as projection on orders.StatusValues;
 }

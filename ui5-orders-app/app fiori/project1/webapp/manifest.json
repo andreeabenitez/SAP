@@ -128,6 +128,15 @@
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
                     "type": "ResponsiveTable"
+                  },
+                  "actions": {
+                    "confirmOrder": {
+                      "press": "orders.project1.ext.controller.OrderActions.confirmarOrden",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "Confirmar Orden"
+                    }
                   }
                 }
               }

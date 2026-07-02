@@ -13,6 +13,8 @@ service OrdersService {
     end as statusCriticality : Integer
   };
 
-  entity Customers as projection on orders.Customers;
+  entity Customers    as projection on orders.Customers;
   entity StatusValues as projection on orders.StatusValues;
+
+  action confirmOrder(orderId : String) returns Orders;
 }

@@ -1,6 +1,15 @@
 using OrdersService from './orders-service';
 
 annotate OrdersService.Orders with @(
+    UI.PresentationVariant: {
+    SortOrder: [
+        {
+            Property:   date,
+            Descending: true
+        }
+    ],
+    Visualizations: ['@UI.LineItem']
+},
     UI.LineItem: [
         { Value: id,           Label: 'ID' },
         {
